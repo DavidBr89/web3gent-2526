@@ -70,3 +70,103 @@ console.log("Test na promise!"); // 2
 // Promise voor het bakken van de pizza in de oven - 2s - Oven is kapot
 // Promise voor het verpakken van die pizza - 1s - Dozen zijn op
 // Promise voor het afrekenen van de pizza - 0s - Saldo ontoereikend
+
+const preparePromise = new Promise((resolve, reject) => {
+  const isError = false;
+
+  setTimeout(() => {
+    if (isError) {
+      reject("Fout");
+    }
+    resolve("Succesvol bereiding");
+  }, 4000);
+});
+
+const bakePromise = new Promise((resolve, reject) => {
+  const isError = false;
+
+  setTimeout(() => {
+    if (isError) {
+      reject("Fout");
+    }
+    resolve("Succesvol bakken");
+  }, 2000);
+});
+
+const packingPromise = new Promise((resolve, reject) => {
+  const isError = false;
+
+  setTimeout(() => {
+    if (isError) {
+      reject("Fout");
+    }
+    resolve("Succesvol verpakking");
+  }, 1000);
+});
+
+const payPromise = new Promise((resolve, reject) => {
+  const isError = false;
+
+  setTimeout(() => {
+    if (isError) {
+      reject("Fout");
+    }
+    resolve("Succesvol betaling");
+  }, 0);
+});
+
+// // 1
+// preparePromise
+//   .then((data) => {
+//     console.log(data);
+//     bakePromise
+//       .then((data) => {
+//         console.log(data);
+//         packingPromise
+//           .then((data) => {
+//             console.log(data);
+//             payPromise
+//               .then((data) => {
+//                 console.log(data);
+//               })
+//               .catch((err) => {
+//                 console.log(err);
+//               });
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+preparePromise.catch((err) => {
+  console.log(err);
+});
+
+preparePromise.then(() => {});
+
+Promise.all([preparePromise, bakePromise, packingPromise, payPromise])
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+const preparePizza = async () => {
+  try {
+    const result = await preparePromise;
+    const resultBaking = await bakePromise;
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+preparePizza();
