@@ -4,7 +4,7 @@ import MyButton from "./MyButton";
 const Header = () => {
   return (
     <div>
-      <MyButton>
+      <MyButton subTitle="Header subtitle">
         <p>Login</p>
       </MyButton>
       <h1>Web 3</h1>
