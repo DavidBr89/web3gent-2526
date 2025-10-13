@@ -64,7 +64,7 @@ myPromise
 
 console.log("Test na promise!"); // 2
 
-// TODO: Promises
+// Promises
 // Simulatie van pizzeria
 // Promise voor het bereiden van de pizza - 4s - Deeg valt op de grond
 // Promise voor het bakken van de pizza in de oven - 2s - Oven is kapot

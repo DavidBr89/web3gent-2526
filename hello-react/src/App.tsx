@@ -5,6 +5,7 @@ import "./App.css";
 
 import Test from "./components/Test";
 import Header from "./components/Header";
+import MyButton from "./components/MyButton";
 
 type ID = number | string;
 type WebType = "Web 1" | "Web 2" | "Web 3";
@@ -46,6 +47,16 @@ function App() {
   return (
     <>
       <Header />
+      <MyButton
+        onClick={(event) => {
+          // console.log(event.);
+          alert(`Vanuit de APP.TSX:  ${event.target}`);
+        }}>
+        Verstuur
+      </MyButton>
+      {/* <a onClick={(event) => event.preventDefault()} href="https://google.be">
+        Google
+      </a> */}
     </>
   );
 }

@@ -1,8 +1,12 @@
 import React from "react";
+import MyButton from "./MyButton";
 
 const Header = () => {
   return (
     <div>
+      <MyButton>
+        <p>Login</p>
+      </MyButton>
       <h1>Web 3</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum odio
