@@ -18,7 +18,7 @@ const Counter = () => {
       <MyButton
         subTitle="Min"
         onClick={() => {
-          setCounter(counter);
+          setCounter(counter - 1);
           console.log(counter);
         }}>
         -
