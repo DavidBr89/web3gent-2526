@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MyButton from "./MyButton";
+import Favorites from "./Favorites";
 
 const Counter = () => {
   //   let counter = 0;
@@ -9,6 +10,7 @@ const Counter = () => {
   // De favorites state blijft wel in de counter component staan en de favorites mag geen duplicates hebben
 
   const [counter, setCounter] = useState(0);
+  const [favorites, setFavorites] = useState<number[]>([]);
 
   console.log("Test rerender");
 
@@ -31,6 +33,17 @@ const Counter = () => {
         }}>
         +
       </MyButton>
+
+      <MyButton
+        subTitle="Favorieten"
+        onClick={() => {
+          if (!favorites.includes(counter)) {
+            setFavorites([...favorites, counter]);
+          }
+        }}>
+        Voeg toe
+      </MyButton>
+      <Favorites favs={favorites} />
     </div>
   );
 };
