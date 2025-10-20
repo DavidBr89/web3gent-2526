@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 const BASE_URL = "https://api.themoviedb.org/3/movie/popular";
-const API_TOKEN =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMGYyZjgzNWQ4MDg5Y2Y5YTczMTk3YTJhMWRkYWJiMyIsIm5iZiI6MTYwNzA4MDMxNi43NjE5OTk4LCJzdWIiOiI1ZmNhMTk3YzY2YTdjMzAwM2U0Nzg0YTEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.33XyUlqIMYXU2Y2nlLRiBuO5j2SlJAPOXao_dmE7mBo";
+const API_TOKEN = import.meta.env.TMDB_API_KEY;
 
 interface MovieResponse {
   page: number;
@@ -32,13 +29,25 @@ interface Movie {
 }
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [error, setError] = useState();
+  // const [error, setError] = useState();
+  const [isRefresh, setIsRefresh] = useState(false);
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      fetchMovies();
+    }, 10000);
+
+    // Component wordt ge-unmount
+    return () => {
+      clearInterval(timerId);
+    };
+  }, []);
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [isRefresh]);
 
   const fetchMovies = async () => {
     try {
@@ -50,13 +59,20 @@ function App() {
       const data = (await response.json()) as MovieResponse;
       setMovies(data.results);
     } catch (error) {
-      setError(error);
+      // setError(error);
       console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className="p-8 bg-slate-200 flex flex-col gap-4">
+      <button
+        className="bg-teal-600 text-2xl text-white uppercase font-black px-4 py-2 cursor-pointer hover:bg-teal-800 rounded-lg"
+        onClick={() => {
+          setIsRefresh(!isRefresh);
+        }}>
+        Ververs
+      </button>
       {movies.map((m) => (
         <div key={m.id}>
           <h1>{m.title}</h1>
